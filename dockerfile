@@ -1,18 +1,20 @@
-# Base image
+# Base image légère
 FROM node:20-alpine
 
-# Working directory
+# Définir le répertoire de travail
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copier package.json et package-lock.json
 COPY package*.json ./
+
+# Installer dépendances strictement (reproductible)
 RUN npm ci --only=production
 
-# Copy source code
+# Copier tout le code
 COPY . .
 
-# Expose port
+# Exposer le port du service
 EXPOSE 3000
 
-# Start service
+# Lancer le service
 CMD ["node", "index.js"]
