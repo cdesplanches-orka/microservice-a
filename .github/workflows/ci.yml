@@ -3,10 +3,10 @@ name: Microservice A CI/CD
 on:
   push:
     paths:
-      - "apps/ms-a/**"
+      - "**"
   pull_request:
     paths:
-      - "apps/ms-a/**"
+      - "**"
 
 jobs:
   test-and-build:
@@ -24,17 +24,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd apps/ms-a
           npm install
 
       - name: Run Unit Tests
         run: |
-          cd apps/ms-a
           npm test
 
       - name: Build Docker Image
         run: |
-          cd apps/ms-a
           docker build -t ghcr.io/${{ github.repository }}/ms-a:${{ github.sha }} .
 
       - name: Smoke Test Container
