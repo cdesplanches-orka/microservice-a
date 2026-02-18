@@ -7,9 +7,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const GRPC_PORT = process.env.GRPC_PORT || 50051;
 
-// gRPC Setup
-const PROTO_PATH = process.env.PROTO_PATH || path.join(__dirname, './protos/service.proto');
-const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
+// gRPC Setup (Industrial Approach Level 3)
+const grpcLib = require('@cdesplanches-orka/grpc-lib');
+const packageDefinition = protoLoader.loadSync(grpcLib.protoPath, {
     keepCase: true,
     longs: String,
     enums: String,
