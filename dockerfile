@@ -14,7 +14,10 @@ RUN npm ci --only=production
 COPY . .
 
 # Exposer le port du service
-EXPOSE 3000
+EXPOSE 3000 50051
+
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD wget --quiet --tries=1 --spider http://localhost:3000/health || exit 1
 
 # Lancer le service
 CMD ["node", "index.js"]
