@@ -7,6 +7,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const GRPC_PORT = process.env.GRPC_PORT || 50051;
 
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+});
+
 // gRPC Setup (Industrial Approach Level 3)
 const grpcLib = require('@cdesplanches-orka/grpc-lib');
 const packageDefinition = protoLoader.loadSync(grpcLib.protoPath, {
@@ -32,7 +37,11 @@ grpcServer.bindAsync(`0.0.0.0:${GRPC_PORT}`, grpc.ServerCredentials.createInsecu
     grpcServer.start();
 });
 
-// Health endpoint
+// Health endpoints
+app.get('/api/a/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
 app.get('/health', (req, res) => {
     res.status(200).send('OK');
 });
