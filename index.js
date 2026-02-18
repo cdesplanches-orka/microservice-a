@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 const GRPC_PORT = process.env.GRPC_PORT || 50051;
 
 // gRPC Setup
-const PROTO_PATH = path.join(__dirname, '../shared-protos/service.proto');
+const PROTO_PATH = path.join(__dirname, '../../shared/protos/service.proto');
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
     keepCase: true,
     longs: String,

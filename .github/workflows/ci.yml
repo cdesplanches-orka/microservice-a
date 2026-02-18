@@ -3,10 +3,10 @@ name: Microservice A CI
 on:
   push:
     paths:
-      - 'ms-a/**'
+      - "apps/ms-a/**"
   pull_request:
     paths:
-      - 'ms-a/**'
+      - "apps/ms-a/**"
 
 jobs:
   build:
@@ -16,10 +16,10 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
       - name: Install dependencies
         run: |
-          cd ms-a
+          cd apps/ms-a
           npm install
       - name: Lint (Placeholder)
         run: echo "Linting..."
