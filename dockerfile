@@ -1,14 +1,16 @@
-# Base image légère
+# Dockerfile for Microservice A (Industrial Level 3)
 FROM node:20-alpine
 
-# Définir le répertoire de travail
 WORKDIR /app
 
-# Copier package.json et package-lock.json
+# Registry Authentication
+ARG NODE_AUTH_TOKEN
+COPY .npmrc .npmrc
 COPY package*.json ./
 
 # Installer dépendances strictement (reproductible)
-RUN npm ci --only=production
+RUN npm ci --omit=dev
+RUN rm -f .npmrc
 
 # Copier tout le code
 COPY . .
