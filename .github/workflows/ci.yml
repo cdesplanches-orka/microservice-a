@@ -33,7 +33,7 @@ jobs:
         run: |
           npm install
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.PAT }}
 
       - name: Run Unit Tests
         run: |
@@ -41,7 +41,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build --build-arg NODE_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }} -t ghcr.io/${{ github.repository }}/ms-a:${{ github.sha }} .
+          docker build --build-arg NODE_AUTH_TOKEN=${{ secrets.PAT }} -t ghcr.io/${{ github.repository }}/ms-a:${{ github.sha }} .
 
       - name: Smoke Test Container
         run: |
